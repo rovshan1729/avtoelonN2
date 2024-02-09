@@ -43,12 +43,21 @@ class OptionValueExtended(BaseModel):
         related_name="values_extended",
     )
     value = models.CharField(max_length=256)  # Continental
-    parent = models.ForeignKey(
-        "self", on_delete=models.CASCADE, related_name="children", null=True, blank=True
-    )
 
     def __str__(self):
         return self.value
+    
+
+class OptionValueExtendedPosition(BaseModel):
+    option_value_extend = models.ForeignKey(
+        OptionValueExtended,
+        on_delete=models.CASCADE,
+        related_name="values_extended_position",
+        )
+    position_value = models.CharField(max_length=256)
+
+    def __str__(self):
+        return self.position_value
 
 
 class PostOption(BaseModel):
